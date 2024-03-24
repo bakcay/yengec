@@ -39,6 +39,9 @@ Sail aliası eklemek için aşağıdaki komutu çalıştırın.
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 ```
 
+key generate etmek için aşağıdaki komutu çalıştırabilirsiniz.
+
+
 
 Daha sonra aşağıdaki komutu çalıştırarak projeyi ayağa kaldırabilirsiniz.
 
@@ -46,18 +49,11 @@ Daha sonra aşağıdaki komutu çalıştırarak projeyi ayağa kaldırabilirsini
 sail up -d
 ```
 
-Artık projeniz çalışıyor. Projeyi durdurmak istediğinizde aşağıdaki komutu çalıştırabilirsiniz.
-
-```bash
-sail down
-```
-
-
-key generate etmek için aşağıdaki komutu çalıştırabilirsiniz.
-
 ```bash
 sail artisan key:generate
 ```
+
+
 
 Veritabanı tablolarını oluşturmak için aşağıdaki komutu çalıştırabilirsiniz.
 
@@ -70,6 +66,9 @@ Sistem çalıştırılması için Passport client'i gereklidir. Passport client 
 ```bash
 sail artisan passport:client --personal --no-interaction
 ```
+
+Artık kullanılabilir halde , 0.0.0.0:80 adresinden erişebilirsiniz. 
+postman_collection.json dosyasını import ederek projeyi test edebilirsiniz.
 
 ## Kullanım
 
