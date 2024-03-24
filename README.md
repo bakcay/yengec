@@ -126,17 +126,29 @@ POST /api/login
 
 Aldığınız token bilgisini, Postman collection parametrelerindeki TOKEN alanına ekleyin.
 
-İşlem yapmak için token gerektiren API endpoint'lerinde, aldığınız token bilgisini kullanın. Bunu yapmak için, request header'ına "Authorization": "Bearer {token}" ekleyin ve {token} kısmını aldığınız token değeri ile değiştirin.
-
 ### Entegrasyon Ekleme:
 
-POST /integration
+```
+POST /api/integration
+{
+  "marketplace":"n11",
+  "username": "kullanıcıadı",
+  "password": "şifre"
+}
+```
 
 Payload olarak marketplace, username, password parametrelerini JSON formatında gönderin.
 
 ### Entegrasyon Düzenleme:
 
+```
 PUT /integration/{id}
+{
+  "marketplace":"n11",
+  "username": "kullanıcıadı",
+  "password": "şifre"
+}
+```
 
 Payload olarak marketplace, username, password parametrelerini JSON formatında gönderin. URL'de belirtilen {id} ile düzenlemek istediğiniz entegrasyonun ID'sini belirtin.
 
