@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "11455408-4a63-4894-9a8a-10d3af721e82",
+		"name": "Yengeç API",
+		"description": "Sistemi ayağa kaldırdıktan sonra öncelikle **tek seferlik** client oluşturulmasını sağlayınız.\n\n`sail artisan passport:client --personal --no-interaction`\n\nAyağa kaldırdığınız url 0.0.0.0:80 harici ise collection parametrelerinden DOMAIN parametresinden değiştirebilirsiniz.\n\n- register komutu örneğindeki gibi kullanıcı adı ve şifrenizi belirleyerek kullanıcı oluşturun, bu komut sonucunda token keyindeki stringi saklayınız.\n- Daha sonra işlem yapmak için belirlediğiniz kullanıcı adı ve şifre ile de token alabilirsiniz.\n- Login ve registerdaki aldığınız token bilgisini collectiondaki TOKEN parametresine yerleştiriniz.\n- Entegrasyon oluşturmak için aldığınız token bilgisini elle güncellemek isterseniz \"Bearer {token}\" {token} parametreyle değiştiriniz\n- entegrasyon ekleme için \"integration create\" methodunu kullanınız , marketplace , username , password parametreleri almaktadır.\n- entegrasyon düzenleme için \"integration update\" methodunu kullanınız , marketplace , username , password parametreleri almaktadır.\n- entegrasyon silme için \"integration create\" methodunu kullanınız , marketplace , username , password parametreleri almaktadır. querystring ile id girilmesi gereklidit\n- entegrasyon silmek için \"integration dekete\" methodunu kullanınız ,querystring ile id girilmesi gerekmektedir.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11236728"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"test.12@test.com\",\n    \"password\":\"123qwe123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DOMAIN}}/api/register",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"test.1@test.com\",\n    \"password\":\"123qwe123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DOMAIN}}/api/login",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "integration create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"marketplace\":\"n11\",\n    \"password\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DOMAIN}}/api/integration",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"integration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "integration update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"marketplace\":\"hepsiburada\",\n    \"password\":\"test\",\n    \"username\":\"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DOMAIN}}/api/integration/1",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"integration",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "integration delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DOMAIN}}/api/integration/1",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"integration",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DOMAIN",
+			"value": "http://0.0.0.0",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "abc",
+			"type": "string"
+		}
+	]
+}
