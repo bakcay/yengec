@@ -61,7 +61,13 @@ Veritabanı tablolarını oluşturmak için aşağıdaki komutu çalıştırabil
 sail artisan migrate
 ```
 
-Sistem çalıştırılması için Passport client'i gereklidir. Passport client oluşturmak için aşağıdaki komutu çalıştırabilirsiniz.
+Sail için generate etmek için aşağıdaki komutu çalıştırabilirsiniz.
+
+```bash
+sail artisan passport:keys
+```
+
+Passport client oluşturmak için aşağıdaki komutu çalıştırabilirsiniz.
 
 ```bash
 sail artisan passport:client --personal --no-interaction
@@ -95,6 +101,32 @@ Daha sonra işlem yapmak için belirlediğiniz kullanıcı adı ve şifre ile de
 
 postman_collection.json dosyasını import ederek projeyi test edebilirsiniz.
 [Postman Collection](postman_collection.json)
+
+
+
+Konsol üzerinden de test yapabilirsiniz,
+
+Ekleme işlemi için örnek
+```bash
+sail artisan integration:add n11 username password
+```
+
+
+Güncelleme işlemi için örnek
+```bash
+sail artisan integration:update 1 trendyol username password
+```
+
+Silme işlemi için örnek
+```bash
+sail artisan integration:delete 1
+```
+
+Test İşlemlerini yapmak için aşağıdaki komutu kullanabilirsiniz
+
+```bash
+sail artisan test
+```
 
 
 
