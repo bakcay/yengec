@@ -11,31 +11,32 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class IntegrationCommandTest extends TestCase {
-    use DatabaseMigrations , WithConsoleEvents;
+    use RefreshDatabase;
 
+    /** @test */
     public function an_integration_can_be_added_via_console() {
+
 
         $_marketplace = Marketplace::N11->value;
         $_username    = fake()->userName;
         $_password    = fake()->text(10); //complex characters cannot be passed via console
 
-        $_artisan = $this->artisan('integration:add', [
+        $this->artisan('integration:add', [
             'marketplace' => $_marketplace,
             'username'    => $_username,
             'password'    => $_password,
-        ]);
+        ])
+        ->expectsOutput('Integration added successfully.')
+        ->assertExitCode(0);
 
-
-        $_artisan->expectsOutput('Integration added successfully.');
-        $_artisan->assertExitCode(0);
-
-         $this->assertDatabaseHas('integrations', [
+        $this->assertDatabaseHas('integrations', [
             'marketplace' => $_marketplace,
             'username'    => $_username,
         ]);
 
     }
 
+    /** @test */
     public function an_integration_can_be_updated_via_console() {
 
         $_marketplace = Marketplace::Trendyol->value;
@@ -49,8 +50,8 @@ class IntegrationCommandTest extends TestCase {
             'username'    => $_username,
             'password'    => $_password,
         ])
-         ->assertExitCode(0)
-         ->expectsOutput('Integration updated successfully.');
+        ->assertExitCode(0)
+        ->expectsOutput('Integration updated successfully.');
 
         $this->assertDatabaseHas('integrations', [
             'marketplace' => $_marketplace,
@@ -59,6 +60,7 @@ class IntegrationCommandTest extends TestCase {
 
     }
 
+    /** @test */
     public function an_integration_can_be_deleted_via_console() {
         $integration = Integration::factory()->create();
 
@@ -69,10 +71,7 @@ class IntegrationCommandTest extends TestCase {
         $this->assertDatabaseMissing('integrations', [
             'id' => $integration->id,
         ]);
-        $this->assertDatabaseHas('integrations', [
-            'marketplace' => $_marketplace,
-            'username'    => $_username,
-        ]);
+
     }
 
 }
