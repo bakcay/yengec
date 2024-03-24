@@ -101,20 +101,50 @@ Sistemi ayağa kaldırdıktan sonra öncelikle tek seferlik client oluşturulmas
 ```bash
 sail artisan passport:client --personal --no-interaction
 ```
-Ayağa kaldırdığınız url 0.0.0.0:80 harici ise collection parametrelerinden DOMAIN parametresinden değiştirebilirsiniz.
 
-register komutu örneğindeki gibi kullanıcı adı ve şifrenizi belirleyerek kullanıcı oluşturun, bu komut sonucunda token keyindeki stringi saklayınız.
+Projeyi localhost dışında bir URL'de çalıştırıyorsanız, Postman collection'ınızın parametrelerindeki DOMAIN değerini projenizin çalıştığı URL ile güncelleyin.
 
-Daha sonra işlem yapmak için belirlediğiniz kullanıcı adı ve şifre ile de token alabilirsiniz.
+Kullanıcı adı ve şifrenizi belirleyerek bir kullanıcı oluşturun. Bu işlem için aşağıdaki komutu kullanabilirsiniz:
+POST /api/register
+```
+{
+  "username": "email adresi",
+  "password": "şifre"
+}
+```
+Bu komut sonucunda aldığınız token değerini saklayın.
 
-- Login ve registerdaki aldığınız token bilgisini collection parametrelerindeki TOKEN parametresine yerleştiriniz.
-- Login oluşturmak için yada login olmak için aldığınız token bilgisini elle güncellemek isterseniz methodlardaki "Bearer {token}" {token} parametreyle değiştiriniz
-- entegrasyon ekleme için "integration create" methodunu kullanınız , marketplace , username , password parametreleri almaktadır.
-- entegrasyon düzenleme için "integration update" methodunu kullanınız , marketplace , username , password parametreleri almaktadır.
-- entegrasyon silme için "integration create" methodunu kullanınız , marketplace , username , password parametreleri almaktadır. querystring ile id girilmesi gereklidit
-- entegrasyon silmek için "integration dekete" methodunu kullanınız ,querystring ile id girilmesi gerekmektedir.
+Token Alma (Login): Daha sonra, belirlediğiniz kullanıcı adı ve şifre ile token alabilirsiniz:
+```
+POST /api/login
+{
+  "username": "email adresi",
+  "password": "şifre"
+}
+```
+### Token Kullanımı
 
+Aldığınız token bilgisini, Postman collection parametrelerindeki TOKEN alanına ekleyin.
 
+İşlem yapmak için token gerektiren API endpoint'lerinde, aldığınız token bilgisini kullanın. Bunu yapmak için, request header'ına "Authorization": "Bearer {token}" ekleyin ve {token} kısmını aldığınız token değeri ile değiştirin.
+
+### Entegrasyon Ekleme:
+
+POST /integration
+
+Payload olarak marketplace, username, password parametrelerini JSON formatında gönderin.
+
+### Entegrasyon Düzenleme:
+
+PUT /integration/{id}
+
+Payload olarak marketplace, username, password parametrelerini JSON formatında gönderin. URL'de belirtilen {id} ile düzenlemek istediğiniz entegrasyonun ID'sini belirtin.
+
+### Entegrasyon Silme:
+
+DELETE /integration/{id}
+
+URL'de belirtilen {id} ile silmek istediğiniz entegrasyonun ID'sini belirtin.
 
 
 
@@ -122,6 +152,7 @@ postman_collection.json dosyasını import ederek projeyi test edebilirsiniz.
 [Postman Collection](postman_collection.json)
 
 
+## Konsol Komutları
 
 Konsol üzerinden de test yapabilirsiniz,
 
