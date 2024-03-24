@@ -76,6 +76,25 @@ sail artisan passport:client --personal --no-interaction
 Artık kullanılabilir halde , 0.0.0.0:80 adresinden erişebilirsiniz. 
 postman_collection.json dosyasını import ederek projeyi test edebilirsiniz.
 
+###  :)
+
+```bash
+git clone git@github.com:bakcay/yengec.git
+cd yengec
+cp .env.example .env
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs
+sail up -d
+sail artisan key:generate
+sail artisan migrate
+sail artisan passport:keys
+sail artisan passport:client --personal --no-interaction
+```
+
 ## Kullanım
 
 Sistemi ayağa kaldırdıktan sonra öncelikle tek seferlik client oluşturulmasını sağlayınız. Eğer yaptıysanız bu adımı atlayın.
@@ -88,8 +107,8 @@ register komutu örneğindeki gibi kullanıcı adı ve şifrenizi belirleyerek k
 
 Daha sonra işlem yapmak için belirlediğiniz kullanıcı adı ve şifre ile de token alabilirsiniz.
 
-- Login ve registerdaki aldığınız token bilgisini collectiondaki TOKEN parametresine yerleştiriniz.
-- Entegrasyon oluşturmak için aldığınız token bilgisini elle güncellemek isterseniz "Bearer {token}" {token} parametreyle değiştiriniz
+- Login ve registerdaki aldığınız token bilgisini collection parametrelerindeki TOKEN parametresine yerleştiriniz.
+- Login oluşturmak için yada login olmak için aldığınız token bilgisini elle güncellemek isterseniz methodlardaki "Bearer {token}" {token} parametreyle değiştiriniz
 - entegrasyon ekleme için "integration create" methodunu kullanınız , marketplace , username , password parametreleri almaktadır.
 - entegrasyon düzenleme için "integration update" methodunu kullanınız , marketplace , username , password parametreleri almaktadır.
 - entegrasyon silme için "integration create" methodunu kullanınız , marketplace , username , password parametreleri almaktadır. querystring ile id girilmesi gereklidit
